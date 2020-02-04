@@ -7,6 +7,6 @@ public class RoundNotFoundException extends Exception {
     private static final long serialVersionUID = 1L;
 
     public RoundNotFoundException(String errorMessage) {
-        super("Raffle not found!");
+        super("round not found!");
     }
 }

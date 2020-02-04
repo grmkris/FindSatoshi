@@ -16,7 +16,9 @@ import org.brunocvcunha.opennode.api.model.OpenNodeCharge;
 import org.brunocvcunha.opennode.api.model.OpenNodeCreateCharge;
 import org.brunocvcunha.opennode.api.model.OpenNodeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LightningService {
 
     private OpenNodeService service = OpenNodeServiceFactory.buildClient("b95d29ac-4ce9-45c9-ab9e-8767b35a01de");

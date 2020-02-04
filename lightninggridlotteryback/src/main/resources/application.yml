@@ -1,9 +1,9 @@
 spring:
   profiles: production
   datasource:
-    url: jdbc:mariadb://localhost:3306/lightningLottery
-    username: lightningLottery
-    password: lightningLottery
+    url: jdbc:mariadb://localhost:3306/findSatoshi
+    username: findSatoshi
+    password: findSatoshi
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
@@ -14,7 +14,7 @@ spring:
 server:
   port: 8080
   servlet:
-    context-path: /lightningLottery	
+    context-path: /findSatoshi	
 logging:
   level:
     root: INFO
@@ -23,9 +23,9 @@ logging:
 spring:
   profiles: docker
   datasource:
-    url: jdbc:mariadb://db:3306/lightninglottery
-    username: lightninglottery
-    password: lightninglottery
+    url: jdbc:mariadb://db:3306/findSatoshi
+    username: findSatoshi
+    password: findSatoshi
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
@@ -36,7 +36,7 @@ spring:
 server:
   port: 8080
   servlet:
-    context-path: /lightningLottery	
+    context-path: /findSatoshi	
 logging:
   level:
     root: INFO
@@ -45,7 +45,7 @@ logging:
 spring:
   profiles: development
   datasource:
-    url: jdbc:mariadb://localhost:3306/findSatoshi
+    url: jdbc:mariadb://172.21.101.178:3306/findSatoshi
     username: findSatoshi
     password: findSatoshi
     driver-class-name: org.mariadb.jdbc.Driver

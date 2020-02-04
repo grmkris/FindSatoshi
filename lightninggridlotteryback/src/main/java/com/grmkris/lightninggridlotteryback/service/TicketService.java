@@ -58,7 +58,7 @@ public class TicketService {
                 .lnPaymentRequest(ticketResponse.getLightningInvoice())
                 .predict(ticketResponse.getNumbers())
                 .openNodeID(ticketResponse.getOpenNodeID())
-                .raffle(round)
+                .round(round)
                 .settledAt(ticketResponse.getSettledAt())
                 .status(ticketResponse.getStatus())
                 .ticketID(ticketResponse.getTicketID())

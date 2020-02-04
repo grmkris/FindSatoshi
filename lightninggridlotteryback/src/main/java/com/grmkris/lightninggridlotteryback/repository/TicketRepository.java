@@ -14,10 +14,11 @@ public interface TicketRepository extends JpaRepository<Ticket, Long>{
     // TODO
     List<Ticket> findByRound(Round round);
 
+    /*
     @Query(
         value= "SELECT * from ticket r WHERE r.roundID = max(r.roundID)"
     )
     List<Ticket> findCurrentRoundTickets();
-
+*/
 
 }

@@ -34,7 +34,7 @@ public class Round{
     private String winner;
 
     
-    @OneToMany(mappedBy = "raffle")
+    @OneToMany(mappedBy = "round")
     private Set<Ticket> tickets;
 
 }

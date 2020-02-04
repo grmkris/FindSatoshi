@@ -28,7 +28,7 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name="roundID", nullable=false)
-    private Round raffle;
+    private Round round;
     
     private String customerName;
     private String customerEmail;
