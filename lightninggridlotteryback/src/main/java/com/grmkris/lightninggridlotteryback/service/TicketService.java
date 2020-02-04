@@ -8,7 +8,7 @@ import com.grmkris.lightninggridlotteryback.model.ClaimRequest;
 import com.grmkris.lightninggridlotteryback.model.ClaimResponse;
 import com.grmkris.lightninggridlotteryback.model.TicketRequest;
 import com.grmkris.lightninggridlotteryback.model.TicketResponse;
-import com.grmkris.lightninggridlotteryback.model.database.Ticket;
+import com.grmkris.lightninggridlotteryback.model.database.Ticket.Ticket;
 import com.grmkris.lightninggridlotteryback.repository.RoundRepository;
 import com.grmkris.lightninggridlotteryback.repository.TicketRepository;
 

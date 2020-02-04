@@ -1,6 +1,7 @@
 package com.grmkris.lightninggridlotteryback.repository;
 
-import com.grmkris.lightninggridlotteryback.model.database.Round;
+
+import com.grmkris.lightninggridlotteryback.model.database.Round.Round;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
