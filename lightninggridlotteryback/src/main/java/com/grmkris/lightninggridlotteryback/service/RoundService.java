@@ -33,32 +33,34 @@ public class RoundService {
     @Autowired
     private LightningService lightningService;
 
-    public Round newRaffle() throws RoundRunningException {
-        // TODO exception if raffleAlreadyRunning
+    public Round newRound() throws RoundRunningException {
+        // TODO exception if RoundAlreadyRunning
 
-        Round raffleCheck = roundRepository.findRunningRound();
-        if (raffleCheck == null) {
+        Round RoundCheck = roundRepository.findRunningRound();
+        if (RoundCheck == null) {
             Date date = new Date();
             long time = date.getTime();
             Timestamp ts = new Timestamp(time);
-            Round raffle = Round.builder().endDate(null).startDate(ts).tickets(null).roundStatus(RoundStatus.RUNNING)
+            Round round;
+            round = Round.builder().endDate(null).startDate(ts).tickets(null).roundStatus(RoundStatus.RUNNING)
                     .build();
-            roundRepository.save(raffle);
-            return raffle;
+
+            roundRepository.save(round);
+            return round;
         } else {
-            throw new RoundRunningException("Raffle is already running");
+            throw new RoundRunningException("Round is already running");
         }
 
     }
 
-    public Round getRaffle(Long roundID) {
-        Optional<Round> raffleOpt = roundRepository.findById(roundID);
-        if (raffleOpt.isPresent()) {
-            return raffleOpt.get();
+    public Round getRound(Long roundID) {
+        Optional<Round> roundOpt = roundRepository.findById(roundID);
+        if (roundOpt.isPresent()) {
+            return roundOpt.get();
         } else {
             // TODO
             return null;
-            // throw new RaffleNotFoundException();
+            // throw new RoundNotFoundException();
         }
     }
 
@@ -66,13 +68,13 @@ public class RoundService {
         return roundRepository.findAll();
     }
 
-    public Round endRound(Long raffleID) throws RoundNotFoundException, RoundEndedException {
-        Optional<Round> currentRoundOpt = roundRepository.findById(raffleID);
+    public Round endRound(Long RoundID) throws RoundNotFoundException, RoundEndedException {
+        Optional<Round> currentRoundOpt = roundRepository.findById(RoundID);
         if (currentRoundOpt.isPresent()) {
             Round currentRound = currentRoundOpt.get();
 
             if (currentRound.getRoundStatus() == RoundStatus.COMPLETED || currentRound.getRoundStatus() == RoundStatus.FAILED) {
-                throw new RoundEndedException("Raffle already ended");
+                throw new RoundEndedException("Round already ended");
             }
             Date date = new Date();
             long time = date.getTime();
@@ -83,10 +85,10 @@ public class RoundService {
             roundRepository.save(currentRound);
             return currentRound;
         } else {
-            throw new RoundNotFoundException("Raffle not found");
+            throw new RoundNotFoundException("Round not found");
         }
-        // TODO excpetion raffleAllreadyEndedException
-        // TODO raffle doesn't exist
+        // TODO excpetion RoundAllreadyEndedException
+        // TODO Round doesn't exist
     }
 
     /**
