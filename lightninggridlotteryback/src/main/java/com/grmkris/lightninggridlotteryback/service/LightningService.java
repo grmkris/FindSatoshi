@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.grmkris.lightninggridlotteryback.model.TicketRequest;
 import com.grmkris.lightninggridlotteryback.model.TicketResponse;
 import com.grmkris.lightninggridlotteryback.model.database.Ticket.Ticket;
 import com.grmkris.lightninggridlotteryback.repository.RoundRepository;
@@ -12,15 +13,14 @@ import com.grmkris.lightninggridlotteryback.repository.TicketRepository;
 import org.brunocvcunha.opennode.api.OpenNodeService;
 import org.brunocvcunha.opennode.api.OpenNodeServiceFactory;
 import org.brunocvcunha.opennode.api.model.OpenNodeCharge;
+import org.brunocvcunha.opennode.api.model.OpenNodeCreateCharge;
 import org.brunocvcunha.opennode.api.model.OpenNodeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class LightningService{
-
-    private static Double TICKET_AMOUNT = 200.00;
+public class LightningService {
 
     private OpenNodeService service = OpenNodeServiceFactory.buildClient("b95d29ac-4ce9-45c9-ab9e-8767b35a01de");
-    
+
     @Autowired
     private TicketRepository ticketRepository;
 
@@ -75,6 +75,28 @@ public class LightningService{
          * return ticketResponse;
          */
         return null;
+    }
+
+    public TicketResponse newTicketOpenNode(TicketRequest ticketRequest, Double ticket_amount) throws IOException {
+
+        OpenNodeCreateCharge createCharge = OpenNodeCreateCharge.builder().orderId("internal id")
+                .description(ticketRequest.getDescription()).amount(ticket_amount)
+                .callbackUrl(ticketRequest.getCallbackUrl()).customerEmail(ticketRequest.getCustomerEmail())
+                .customerName(ticketRequest.getCustomerName())
+                // .currency(OpenNodeCurrency.EUR) // default is satoshis
+                .build();
+
+        OpenNodeCharge createdCharge = service.createCharge(createCharge).execute().body().getData();
+
+        TicketResponse ticketResponse = TicketResponse.builder().amount(ticket_amount)
+                .customerEmail(ticketRequest.getCustomerEmail()).customerName(createdCharge.getName())
+                .customerDescription(ticketRequest.getDescription()).fiatValue(createdCharge.getFiatValue())
+                .lightningInvoice(createdCharge.getLightningInvoice().getPayreq()).numbers(ticketRequest.getNumbers())
+                .openNodeID(createdCharge.getId()).settledAt(createdCharge.getLightningInvoice().getSettledAt())
+                .status(createdCharge.getStatus().name()).build();
+
+        return ticketResponse;
+
     }
 
 }

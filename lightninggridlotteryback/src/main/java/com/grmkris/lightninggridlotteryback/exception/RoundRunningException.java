@@ -1,13 +1,13 @@
 package com.grmkris.lightninggridlotteryback.exception;
 
-public class RaffleRunningException extends Exception {
+public class RoundRunningException extends Exception {
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
     // TODO add class of already running Raffle to this exception?
-    public RaffleRunningException(String errorMessage){
+    public RoundRunningException(String errorMessage){
         super("Raffle is running!");
     }
 }

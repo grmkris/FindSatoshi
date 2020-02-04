@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.grmkris.lightninggridlotteryback.model.ClaimRequest;
 import com.grmkris.lightninggridlotteryback.model.ClaimResponse;
+import com.grmkris.lightninggridlotteryback.model.RoundInfoResponse;
 import com.grmkris.lightninggridlotteryback.model.TicketRequest;
 import com.grmkris.lightninggridlotteryback.model.TicketResponse;
 import com.grmkris.lightninggridlotteryback.service.TicketService;
@@ -30,10 +31,7 @@ public class TicketController{
         return ticketService.claimWinnings(claimRequest);
     }
 
-    @RequestMapping(path = "/tickets", method = RequestMethod.GET)
-    public List<TicketResponse> getTickets() {
-        return ticketService.getTickets();
-    }
+
 
 
 

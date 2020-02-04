@@ -1,12 +1,12 @@
 package com.grmkris.lightninggridlotteryback.exception;
 
-public class RaffleEndedException extends Exception {
+public class RoundEndedException extends Exception {
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
-    public RaffleEndedException(String errorMessage) {
+    public RoundEndedException(String errorMessage) {
         super("Raffle ended!");
     }
 }
