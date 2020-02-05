@@ -5,16 +5,36 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { HttpClientModule } from '@angular/common/http';
+import { TicketDialogComponent } from './ticket-dialog/ticket-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TicketDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    MatGridListModule
+    MatGridListModule,
+    HttpClientModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    FormsModule
+  ],
+  entryComponents: [
+    TicketDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

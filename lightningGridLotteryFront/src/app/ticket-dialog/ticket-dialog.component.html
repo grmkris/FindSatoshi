@@ -1,0 +1,23 @@
+<div class="example-container">
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="ticketRequest.customerName" placeholder="Name">
+        <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" [(ngModel)]="ticketRequest.customerEmail">
+        <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Comment</mat-label>
+        <input matInput placeholder="Comment" [(ngModel)]="ticketRequest.description">
+        <mat-icon matSuffix>comment</mat-icon>
+
+    </mat-form-field>
+
+    <button mat-button color="accent" (click)="getNewTicket(ticketRequest)">Ticket = 1000 Satoshi</button>
+
+</div>

@@ -12,37 +12,7 @@
 
 <div id="grid">
   <mat-grid-list cols="5" rowHeight="1:1" gutterSize="5px">
-    <mat-grid-tile>1</mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-    <mat-grid-tile>5</mat-grid-tile>
-
-    <mat-grid-tile>1</mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-    <mat-grid-tile>5</mat-grid-tile>
-
-    <mat-grid-tile>1</mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-    <mat-grid-tile>5</mat-grid-tile>
-
-
-    <mat-grid-tile>1</mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-    <mat-grid-tile>5</mat-grid-tile>
-
-
-    <mat-grid-tile>1</mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-    <mat-grid-tile>5</mat-grid-tile>
+    <mat-grid-tile class="hvr-buzz" [style.background-color]="getBackgroundColour(tile.value)" (click)="openDialog(tile.key)" *ngFor="let tile of grid | keyvalue">{{tile.value}}</mat-grid-tile>
   </mat-grid-list>
 </div>
 
@@ -50,7 +20,7 @@
 
 <div id="footer" class="body-2">
   <hr>
-  This game was made with 💙 by <a href="https://grmkris.com/">grmkris.com</a>
+  This game was made with 💙 by <a href="https://grmkris.com/">me</a>
   <br>
   Support me <a href="https://btcpay.grmkris.com/ ">here</a>
   <br>
