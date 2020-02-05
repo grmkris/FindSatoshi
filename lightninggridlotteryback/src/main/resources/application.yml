@@ -45,18 +45,18 @@ logging:
 spring:
   profiles: development
   datasource:
-    url: jdbc:mariadb://172.21.101.178:3306/findSatoshi
+    url: jdbc:mariadb://172.30.43.24:3306/findSatoshi
     username: findSatoshi
     password: findSatoshi
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop #validate #create-drop #validate 
+      ddl-auto: validate #validate #create-drop #validate 
   flyway:
     enabled: false
     baselineOnMigrate: false
 server:
-  port: 8080
+  port: 8082
   servlet:
     context-path: /findSatoshi	
 logging:

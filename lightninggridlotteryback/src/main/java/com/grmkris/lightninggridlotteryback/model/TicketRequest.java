@@ -12,7 +12,7 @@ public class TicketRequest{
     String customerName; // name of customer, or custom text
     String customerEmail; //
     String description;
-    String numbers;
+    String predict;
     String callbackUrl;
     String successUrl;
 

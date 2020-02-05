@@ -4,7 +4,6 @@ import com.grmkris.lightninggridlotteryback.exception.RoundRunningException;
 import com.grmkris.lightninggridlotteryback.model.database.Round.Round;
 import com.grmkris.lightninggridlotteryback.service.RoundService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

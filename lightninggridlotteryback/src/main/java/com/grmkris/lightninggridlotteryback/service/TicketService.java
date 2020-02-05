@@ -1,12 +1,9 @@
 package com.grmkris.lightninggridlotteryback.service;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import com.grmkris.lightninggridlotteryback.model.ClaimRequest;
 import com.grmkris.lightninggridlotteryback.model.ClaimResponse;
-import com.grmkris.lightninggridlotteryback.model.RoundInfoResponse;
 import com.grmkris.lightninggridlotteryback.model.TicketRequest;
 import com.grmkris.lightninggridlotteryback.model.TicketResponse;
 import com.grmkris.lightninggridlotteryback.model.database.Round.Round;

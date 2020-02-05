@@ -93,7 +93,7 @@ public class LightningService {
         TicketResponse ticketResponse = TicketResponse.builder().amount(ticket_amount)
                 .customerEmail(ticketRequest.getCustomerEmail()).customerName(createdCharge.getName())
                 .customerDescription(ticketRequest.getDescription()).fiatValue(createdCharge.getFiatValue())
-                .lightningInvoice(createdCharge.getLightningInvoice().getPayreq()).numbers(ticketRequest.getNumbers())
+                .lightningInvoice(createdCharge.getLightningInvoice().getPayreq()).numbers(ticketRequest.getPredict())
                 .openNodeID(createdCharge.getId()).settledAt(createdCharge.getLightningInvoice().getSettledAt())
                 .status(createdCharge.getStatus().name()).build();
 

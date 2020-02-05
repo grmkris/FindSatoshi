@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.grmkris.lightninggridlotteryback.model.database.Ticket.Ticket;
 
 import lombok.AllArgsConstructor;
@@ -34,6 +35,7 @@ public class Round{
     private String winner;
 
     
+    @JsonIgnore
     @OneToMany(mappedBy = "round")
     private Set<Ticket> tickets;
 
