@@ -3,6 +3,9 @@ mat-grid-tile{
     background-color: #F6B330;
 }
 
+
+
+
 #grid{
     max-width: 620px;
     margin-left: auto;
@@ -24,6 +27,8 @@ mat-grid-tile{
 .mat-display-2{
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 /* source: https://github.com/IanLunn/Hover/blob/master/css/hover.css */
@@ -129,4 +134,24 @@ mat-grid-tile{
   }
   .hvr-trim:hover:before, .hvr-trim:focus:before, .hvr-trim:active:before {
     opacity: 1;
+  }
+
+  @media only screen and (max-width: 720) {
+    #grid{
+      max-width: 620px;
+      margin-left: 10px;
+      margin-right: 10px;
+  }
+  
+  #header{
+      max-width: 720px;
+      margin-left: 15px;
+      margin-right: 15px;
+  }
+  
+  #footer{
+      max-width: 720px;
+      margin-left: 15px;
+      margin-right: 15px;
+  }
   }
