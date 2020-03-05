@@ -8,6 +8,7 @@ import com.grmkris.lightninggridlotteryback.model.TicketRequest;
 import com.grmkris.lightninggridlotteryback.model.TicketResponse;
 import com.grmkris.lightninggridlotteryback.model.database.Round.Round;
 import com.grmkris.lightninggridlotteryback.model.database.Ticket.Ticket;
+import com.grmkris.lightninggridlotteryback.model.database.Ticket.TicketStatus;
 import com.grmkris.lightninggridlotteryback.repository.RoundRepository;
 import com.grmkris.lightninggridlotteryback.repository.TicketRepository;
 
@@ -57,7 +58,7 @@ public class TicketService {
                 .openNodeID(ticketResponse.getOpenNodeID())
                 .round(round)
                 .settledAt(ticketResponse.getSettledAt())
-                .status(ticketResponse.getStatus())
+                .status(TicketStatus.valueOf(ticketResponse.getStatus()))
                 .ticketID(ticketResponse.getTicketID())
                 .build();
                 ticket = ticketRepository.save(ticket);

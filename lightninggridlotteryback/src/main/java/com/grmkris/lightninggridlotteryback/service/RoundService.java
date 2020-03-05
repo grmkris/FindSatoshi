@@ -15,6 +15,7 @@ import com.grmkris.lightninggridlotteryback.model.database.Round.Round;
 import com.grmkris.lightninggridlotteryback.model.database.Round.RoundStatus;
 import com.grmkris.lightninggridlotteryback.model.database.Round.RoundType;
 import com.grmkris.lightninggridlotteryback.model.database.Ticket.Ticket;
+import com.grmkris.lightninggridlotteryback.model.database.Ticket.TicketStatus;
 import com.grmkris.lightninggridlotteryback.repository.RoundRepository;
 import com.grmkris.lightninggridlotteryback.repository.TicketRepository;
 
@@ -107,7 +108,7 @@ public class RoundService {
 
     public RoundInfoResponse getRoundInfo() {
         Round round = roundRepository.findRunningRound();
-        List<Ticket> tickets = ticketRepository.findByRound(round);
+        List<Ticket> tickets = ticketRepository.findByRoundAndStatus(round, TicketStatus.PAID);
 
         List<String> predictions = tickets.stream().map(Ticket::getPredict).collect(Collectors.toList());
         RoundInfoResponse roundInfoResponse = RoundInfoResponse.builder().currentRound(round)

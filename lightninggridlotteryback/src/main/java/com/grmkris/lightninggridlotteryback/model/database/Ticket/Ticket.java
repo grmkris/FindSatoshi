@@ -2,6 +2,8 @@ package com.grmkris.lightninggridlotteryback.model.database.Ticket;
 
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +38,10 @@ public class Ticket {
     private String predict;
 
     private String openNodeID;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private TicketStatus status;
+    
     private Double amount;
     private String lnPaymentRequest;
     private Long settledAt;

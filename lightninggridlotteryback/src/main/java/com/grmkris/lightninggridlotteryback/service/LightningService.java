@@ -7,6 +7,7 @@ import java.util.List;
 import com.grmkris.lightninggridlotteryback.model.TicketRequest;
 import com.grmkris.lightninggridlotteryback.model.TicketResponse;
 import com.grmkris.lightninggridlotteryback.model.database.Ticket.Ticket;
+import com.grmkris.lightninggridlotteryback.model.database.Ticket.TicketStatus;
 import com.grmkris.lightninggridlotteryback.repository.RoundRepository;
 import com.grmkris.lightninggridlotteryback.repository.TicketRepository;
 
@@ -85,6 +86,7 @@ public class LightningService {
                 .description(ticketRequest.getDescription()).amount(ticket_amount)
                 .callbackUrl(ticketRequest.getCallbackUrl()).customerEmail(ticketRequest.getCustomerEmail())
                 .customerName(ticketRequest.getCustomerName())
+                .successUrl("http://localhost:4200/")
                 // .currency(OpenNodeCurrency.EUR) // default is satoshis
                 .build();
 
