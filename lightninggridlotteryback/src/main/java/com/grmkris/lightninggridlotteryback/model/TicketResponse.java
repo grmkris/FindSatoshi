@@ -1,7 +1,5 @@
 package com.grmkris.lightninggridlotteryback.model;
 
-import com.grmkris.lightninggridlotteryback.model.database.Ticket.TicketStatus;
-
 import lombok.Builder;
 import lombok.Data;
 

@@ -16,6 +16,11 @@ public interface TicketRepository extends JpaRepository<Ticket, Long>{
 
     List<Ticket> findByRoundAndStatus(Round round, TicketStatus status);
 
+    Ticket findByOpenNodeID(String openNodeID);
+
+    Ticket findByCustomerName(String customerName);
+
+
     /*
     @Query(
         value= "SELECT * from ticket r WHERE r.roundID = max(r.roundID)"

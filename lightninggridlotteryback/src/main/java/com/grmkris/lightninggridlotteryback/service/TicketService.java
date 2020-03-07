@@ -86,5 +86,15 @@ public class TicketService {
         return null;
     }
 
+    public Ticket updateTicket(String openNodeID, String status){
+        Ticket ticket = ticketRepository.findByOpenNodeID(openNodeID);
+        if (status.equals("paid")){
+            ticket.setStatus(TicketStatus.PAID);
+        }
+        ticketRepository.save(ticket);
+        return ticket;
+        
+    }
+
 
 }

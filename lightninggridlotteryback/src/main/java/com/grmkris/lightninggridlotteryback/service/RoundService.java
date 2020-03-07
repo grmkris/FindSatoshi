@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.grmkris.lightninggridlotteryback.exception.RoundEndedException;
@@ -114,6 +115,15 @@ public class RoundService {
         RoundInfoResponse roundInfoResponse = RoundInfoResponse.builder().currentRound(round)
                 .currentPredictions(predictions).build();
         return roundInfoResponse;
+    }
+
+    public void checkRoundStatus() throws RoundNotFoundException, RoundEndedException {
+        Round round = roundRepository.findRunningRound();
+        List<String> predictList = round.getTickets().stream().filter(p -> p.getStatus()==(TicketStatus.PAID)).map(Ticket::getPredict).collect(Collectors.toList());
+        if ( predictList.stream().distinct().count() == 25 ){
+            this.endRound(round.getRoundID());
+        }
+
     }
 
 }
