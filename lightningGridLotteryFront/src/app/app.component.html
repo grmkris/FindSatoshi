@@ -1,29 +1,16 @@
-<div id="header">
-  <h1 class="mat-display-2">Find <font color="orange">Satoshi</font>🐱‍👤 ! </h1>
-  <ul class="body-1">
-    <li>You can buy any tile you think that satoshi is hidding behind.</li>
-    <li>When all tiles are bought satoshi is revealed and game restarts.</li>
-    <li>Winner can claim their winning 🏆 after round ends.</li>
-    <li>This game is <u>provably fair</u> 📜 and uses expirimental technology
-      <u>bitcoin lightning</u>⚡ for instant deposits / withdrawals</li>
-  </ul>
-
-</div>
-
-<div id="grid">
-  <mat-grid-list cols="5" rowHeight="1:1" gutterSize="5px">
-    <mat-grid-tile class="hvr-buzz" [style.background-color]="getBackgroundColour(tile.value)" (click)="openDialog(tile.key)" *ngFor="let tile of grid | keyvalue">{{tile.value}}</mat-grid-tile>
-  </mat-grid-list>
-</div>
+<router-outlet></router-outlet>
 
 
 
-<div id="footer" class="body-2">
+
+<footer class="body-2" fxLayoutGap="15px">
+  
   <hr>
-  This game was made with 💙 by <a href="https://grmkris.com/">me</a>
+  This game was made with 💙 by <a href="https://grmkris.com/">grmkris</a>
   <br>
-  Support me <a href="https://btcpay.grmkris.com/ ">here</a>
-  <br>
-  Code and instructions for running this game on your server are <a href="https://github.com/">here</a>
+  <a mat-raised-button color="accent" href="https://btcpay.grmkris.com/ ">support me ☕</a>
+  <a mat-raised-button color="accent" href="https://github.com/">code and intructions 👨‍💻</a>
 
-</div>
+
+</footer>
+

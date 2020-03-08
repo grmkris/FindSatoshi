@@ -1,0 +1,23 @@
+<div id="header">
+    <h1 class="mat-display-2">Find <font color="orange">Satoshi</font>🐱‍👤 !
+    </h1>
+    <ul class="body-1">
+      <li>You can buy any tile you think that satoshi is hidding behind.</li>
+      <li>When all tiles are bought satoshi is revealed and game restarts.</li>
+      <li>Winner can claim their winning 🏆 after round ends.</li>
+      <li>This game is <i>provably fair</i> 📜 and uses <i>bitcoin lightning</i> for instant deposits / withdrawals</li>
+      <li>Check <button mat-raised-button routerLink="history" routerLinkActive="active" >history</button> and claim winnings </li>
+    </ul>
+    
+  </div>
+  
+  <div id="grid">
+    <mat-grid-list cols="5" rowHeight="1:1" gutterSize="5px">
+      <mat-grid-tile class="hvr-buzz"
+        [style.background-color]="getBackgroundColour(tile.value)"
+        (click)="openDialog(tile.key)" *ngFor="let tile of grid | keyvalue">
+        {{tile.value}}
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  

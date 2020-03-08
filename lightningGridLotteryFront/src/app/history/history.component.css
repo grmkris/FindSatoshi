@@ -1,0 +1,55 @@
+table {
+  width: 100%;
+}
+
+#content{
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+#header{
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer{
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mat-display-2{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+
+
+@media only screen and (max-width: 720px) {
+  
+  #content{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+  #header{
+      max-width: 720px;
+      margin-left: 15px;
+      margin-right: 15px;
+  }
+
+  footer{
+      max-width: 720px;
+      margin-left: 15px;
+      margin-right: 15px;
+  }
+
+  mat-header-row, mat-row {
+    width: 200%;  
+   }
+}

@@ -13,11 +13,22 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { HistoryComponent } from './history/history.component';
+import {MatTableModule} from '@angular/material/table';
+import { RouterModule, Routes } from '@angular/router';
+import { GameComponent } from './game/game.component';
 
+
+const appRoutes: Routes = [
+  { path: 'history', component: HistoryComponent },
+  { path: '', component: GameComponent }
+];
 @NgModule({
   declarations: [
     AppComponent,
-    TicketDialogComponent
+    TicketDialogComponent,
+    HistoryComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +42,12 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
   ],
   entryComponents: [
     TicketDialogComponent
