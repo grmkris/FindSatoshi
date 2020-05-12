@@ -1,6 +1,8 @@
 package com.grmkris.lightninggridlotteryback.controller;
 
-import com.grmkris.lightninggridlotteryback.model.RoundInfoResponse;
+import java.util.List;
+
+import com.grmkris.lightninggridlotteryback.model.RoundResponse;
 import com.grmkris.lightninggridlotteryback.service.RoundService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,15 @@ public class RoundController{
     @Autowired
     RoundService roundService;
 
-    @RequestMapping(path = "/round/current/info", method = RequestMethod.GET)
-    public RoundInfoResponse getRoundInfo() {
-        return roundService.getRoundInfo();
+    @RequestMapping(path = "/rounds/current/", method = RequestMethod.GET)
+    public RoundResponse getCurrentRoundo() {
+        return roundService.getCurrentRound();
+    }
+
+
+    @RequestMapping(path = "/rounds/past/", method = RequestMethod.GET)
+    public List<RoundResponse> getPastRounds() {
+        return roundService.getPastRounds();
     }
 
 }

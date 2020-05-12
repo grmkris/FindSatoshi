@@ -1,6 +1,7 @@
 package com.grmkris.lightninggridlotteryback.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.grmkris.lightninggridlotteryback.model.ClaimRequest;
 import com.grmkris.lightninggridlotteryback.model.ClaimResponse;
@@ -95,6 +96,16 @@ public class TicketService {
         return ticket;
         
     }
+
+	public void findWinners(Round round) {
+        List<Ticket> ticketList = ticketRepository.findByRound(round);
+        ticketList.stream().forEach(ticket -> {
+            if ( ticket.getPredict().equals(round.getWinner())){
+                ticket.setStatus(TicketStatus.WINNER);
+            }
+        });
+        ticketRepository.saveAll(ticketList);
+	}
 
 
 }

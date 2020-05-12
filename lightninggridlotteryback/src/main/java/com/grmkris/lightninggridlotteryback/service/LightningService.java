@@ -7,7 +7,6 @@ import java.util.List;
 import com.grmkris.lightninggridlotteryback.model.TicketRequest;
 import com.grmkris.lightninggridlotteryback.model.TicketResponse;
 import com.grmkris.lightninggridlotteryback.model.database.Ticket.Ticket;
-import com.grmkris.lightninggridlotteryback.repository.RoundRepository;
 import com.grmkris.lightninggridlotteryback.repository.TicketRepository;
 
 import org.brunocvcunha.opennode.api.OpenNodeService;
@@ -16,6 +15,7 @@ import org.brunocvcunha.opennode.api.model.OpenNodeCharge;
 import org.brunocvcunha.opennode.api.model.OpenNodeCreateCharge;
 import org.brunocvcunha.opennode.api.model.OpenNodeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,11 +23,11 @@ public class LightningService {
 
     private OpenNodeService service = OpenNodeServiceFactory.buildClient("b95d29ac-4ce9-45c9-ab9e-8767b35a01de");
 
-    @Autowired
-    private TicketRepository ticketRepository;
+    @Value("${find-satoshi.url}")
+    String callbackUrl;
 
     @Autowired
-    private RoundRepository roundRepository;
+    private TicketRepository ticketRepository;
 
     public List<TicketResponse> getAllTicketsOpenNode() {
         List<TicketResponse> ticketResponses = new ArrayList<TicketResponse>();
@@ -85,7 +85,7 @@ public class LightningService {
                 .description(ticketRequest.getDescription()).amount(ticket_amount)
                 .callbackUrl(ticketRequest.getCallbackUrl()).customerEmail(ticketRequest.getCustomerEmail())
                 .customerName(ticketRequest.getCustomerName())
-                .callbackUrl("http://fd7a6998.ngrok.io/findSatoshi/success")
+                .callbackUrl(callbackUrl + "findSatoshi/success")
                 .successUrl("http://localhost:4200/")
                 // .currency(OpenNodeCurrency.EUR) // default is satoshis
                 .build();

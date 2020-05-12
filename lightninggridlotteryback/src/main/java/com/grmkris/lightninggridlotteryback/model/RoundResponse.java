@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Builder
 @Data
-public class RoundInfoResponse {
-    Round currentRound;
-    List<String> currentPredictions;
+public class RoundResponse {
+    Round round;
+    List<String> predictions;
 }
