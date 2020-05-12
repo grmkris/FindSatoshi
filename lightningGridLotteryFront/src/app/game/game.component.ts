@@ -34,10 +34,10 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.findSatoshiService.getRoundInfo().subscribe(response => {
+    this.findSatoshiService.getCurrentRound().subscribe(response => {
       this.roundInfo = response;
-      for(var i = 0; i < this.roundInfo.currentPredictions.length ; i++){
-        this.grid[this.roundInfo.currentPredictions[i]]++;
+      for(var i = 0; i < this.roundInfo.predictions.length ; i++){
+        this.grid[this.roundInfo.predictions[i]]++;
       }
       console.log(this.grid);
     });

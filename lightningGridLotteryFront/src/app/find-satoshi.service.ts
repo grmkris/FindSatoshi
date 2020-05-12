@@ -10,8 +10,10 @@ import { Observable } from 'rxjs';
 })
 export class FindSatoshiService {
 
-  ticketUrl = 'http://localhost:8082/findSatoshi/ticket';
-  roundInfoUrl = 'http://localhost:8082/findSatoshi/round/current/info';
+  ticketUrl = 'http://localhost:8081/findSatoshi/ticket';
+  currentRoundUrl = 'http://localhost:8081/findSatoshi/rounds/current/';
+  pastRoundsUrl = 'http://localhost:8081/findSatoshi/rounds/past/';
+  
 
   constructor(private http: HttpClient) { }
 
@@ -19,8 +21,12 @@ export class FindSatoshiService {
     return this.http.post<TicketResponse>(this.ticketUrl, ticketRequest);
   }
 
-  getRoundInfo() : Observable<RoundInfo>{
-    return this.http.get<RoundInfo>(this.roundInfoUrl);
+  getCurrentRound() : Observable<RoundInfo>{
+    return this.http.get<RoundInfo>(this.currentRoundUrl);
+  }
+
+  getPastRounds() : Observable<Array<RoundInfo>>{
+    return this.http.get<Array<RoundInfo>>(this.currentRoundUrl);
   }
 
 }
