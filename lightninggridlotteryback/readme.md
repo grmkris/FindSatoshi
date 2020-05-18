@@ -17,3 +17,8 @@ This is backend code for game FindSatoshi
  - GET /winnings
 
 ## DATABASE 
+
+
+## DOCKER
+- `docker build -t kristjangrm/find-satoshi-back .`
+- `docker run -p 8081:8081 kristjangrm/find-satoshi-back`
