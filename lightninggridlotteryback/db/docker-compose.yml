@@ -8,7 +8,6 @@ services:
   db:
     image: mariadb:10.4.12
     container_name: db
-    restart: always
     environment:
       MYSQL_DATABASE: 'findSatoshi'
       # So you don't have to use root, but you can if you like

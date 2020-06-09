@@ -1,29 +1,4 @@
 spring:
-  profiles: production
-  datasource:
-    url: jdbc:mariadb://127.0.0.1:3306/findSatoshi
-    username: findSatoshi
-    password: findSatoshi
-    driver-class-name: org.mariadb.jdbc.Driver
-    initialization-mode: always
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-  flyway:
-    enabled: true
-    baselineOnMigrate: true
-server:
-  port: 8080
-  servlet:
-    context-path: /findSatoshi	
-logging:
-  level:
-    root: INFO
-find-satoshi:
-  url: ${findSatoshiUrl}
----
-
-spring:
   profiles: docker
   datasource:
     url: jdbc:mariadb://127.0.0.1:3306/findSatoshi
@@ -51,7 +26,7 @@ find-satoshi:
 spring:
   profiles: development
   datasource:
-    url: jdbc:mariadb://127.0.0.1:3306/findSatoshi
+    url: jdbc:mariadb://localhost:3306/findSatoshi
     username: findSatoshi
     password: findSatoshi
     driver-class-name: org.mariadb.jdbc.Driver
