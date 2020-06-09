@@ -1,25 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FindSatoshiService } from '../find-satoshi.service';
+import { RoundInfo } from '../round-info';
+import { MatDialog } from '@angular/material/dialog';
+import { ClaimWinningsDialogComponent } from './claim-winnings-dialog/claim-winnings-dialog.component';
 
-
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'C2', weight: 25000},
-  {position: 2, name: 'A5', weight: 46500},
-  {position: 3, name: 'E2', weight: 34343},
-  {position: 4, name: 'C3', weight: 34321},
-  {position: 5, name: 'G2', weight: 222222},
-  {position: 6, name: 'B2', weight: 150000},
-  {position: 7, name: 'G2', weight: 23222},
-  {position: 8, name: 'E5', weight: 23255},
-  {position: 9, name: 'E2', weight: 23112},
-  {position: 10, name: 'B4', weight: 32432},
-];
 
 @Component({
   selector: 'app-history',
@@ -27,12 +11,29 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'claim'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['id', 'winner', 'claim'];
+  dataSource: RoundInfo[];
 
-  constructor() { }
+
+  constructor(private findSatoshiService: FindSatoshiService, public dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    this.findSatoshiService.getPastRounds().subscribe(
+      data => {
+        this.dataSource = data;
+      },
+      error => {
+        console.log("error retreiving history!");
+      });
+  }
+
+  openDialog(roundInfo : RoundInfo) {
+    this.dialog.open(ClaimWinningsDialogComponent, {
+      data: roundInfo
+    });
   }
 
 }
