@@ -17,7 +17,8 @@ import { HistoryComponent } from './history/history.component';
 import {MatTableModule} from '@angular/material/table';
 import { RouterModule, Routes } from '@angular/router';
 import { GameComponent } from './game/game.component';
-
+import { ClaimWinningsDialogComponent } from './history/claim-winnings-dialog/claim-winnings-dialog.component';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 const appRoutes: Routes = [
   { path: 'history', component: HistoryComponent },
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     AppComponent,
     TicketDialogComponent,
     HistoryComponent,
-    GameComponent
+    GameComponent,
+    ClaimWinningsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,9 +50,11 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
+    TextFieldModule
   ],
   entryComponents: [
-    TicketDialogComponent
+    TicketDialogComponent,
+    ClaimWinningsDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -26,7 +26,7 @@ export class FindSatoshiService {
   }
 
   getPastRounds() : Observable<Array<RoundInfo>>{
-    return this.http.get<Array<RoundInfo>>(this.currentRoundUrl);
+    return this.http.get<Array<RoundInfo>>(this.pastRoundsUrl);
   }
 
 }
