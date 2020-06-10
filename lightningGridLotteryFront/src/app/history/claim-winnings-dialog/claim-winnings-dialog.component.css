@@ -4,11 +4,11 @@
     width: 100%;
   }
   
-  .example-full-width {
-    width: 100%;
-  }
+.example-full-width {
+  width: 100%;
+}
 
 
-  textarea{
-      overflow: hidden !important;
-  }
+textarea{
+    overflow: hidden !important;
+}
