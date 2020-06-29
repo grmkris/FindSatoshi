@@ -8,15 +8,20 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import com.grmkris.lightninggridlotteryback.exception.ClaimException;
 import com.grmkris.lightninggridlotteryback.exception.RoundEndedException;
 import com.grmkris.lightninggridlotteryback.exception.RoundNotFoundException;
 import com.grmkris.lightninggridlotteryback.exception.RoundRunningException;
+import com.grmkris.lightninggridlotteryback.model.ClaimRequest;
+import com.grmkris.lightninggridlotteryback.model.ClaimResponse;
 import com.grmkris.lightninggridlotteryback.model.RoundResponse;
+import com.grmkris.lightninggridlotteryback.model.OpenNode.transfers.WithdrawalResponse;
 import com.grmkris.lightninggridlotteryback.model.database.Round.Round;
 import com.grmkris.lightninggridlotteryback.model.database.Round.RoundStatus;
 import com.grmkris.lightninggridlotteryback.model.database.Round.RoundType;
 import com.grmkris.lightninggridlotteryback.model.database.Ticket.Ticket;
 import com.grmkris.lightninggridlotteryback.model.database.Ticket.TicketStatus;
+import com.grmkris.lightninggridlotteryback.repository.LightningRepository;
 import com.grmkris.lightninggridlotteryback.repository.RoundRepository;
 import com.grmkris.lightninggridlotteryback.repository.TicketRepository;
 
@@ -33,6 +38,12 @@ public class RoundService {
 
     @Autowired
     private RoundRepository roundRepository;
+
+    @Autowired
+    private LightningRepository lightningRepository;
+
+    @Autowired
+    private TicketService ticketService;
 
     public Round newRound() throws RoundRunningException {
 
@@ -123,13 +134,14 @@ public class RoundService {
      * @throws RoundEndedException
      * @throws RoundRunningException
      */
-    public Round checkAndEndRound() throws RoundNotFoundException, RoundEndedException, RoundRunningException {
+    public Round updateRound() throws RoundNotFoundException, RoundEndedException, RoundRunningException {
         Round round = roundRepository.findRunningRound();
         List<Ticket> ticketList = ticketRepository.findByRound(round);
         List<String> predictList = ticketList.stream().filter(p -> p.getStatus() == (TicketStatus.PAID))
                 .map(Ticket::getPredict).collect(Collectors.toList());
         if (predictList.stream().distinct().count() == 25) {
             this.endRound(round.getRoundID());
+            ticketService.findWinners(round);
         }
         return round;
     }
@@ -152,4 +164,54 @@ public class RoundService {
         });
         return roundResponseList;
     }
+
+	public ClaimResponse claimWinnings(ClaimRequest claimRequest) throws ClaimException {
+        Round round = this.roundRepository.findById(claimRequest.getRoundID()).get();
+       /**
+        * Round must have status completed, and ticket with same secret must exist with status WINNER
+        */
+        List<Ticket> ticketList = ticketRepository.findByRound(round);
+        List<Ticket> winnerList = ticketList.stream().filter(p -> p.getStatus() == (TicketStatus.WINNER)).filter(ticket -> ticket.getSecret().equals(claimRequest.getSecret())).collect(Collectors.toList());
+
+        if( winnerList.size() != 0 ){
+            
+        }
+        this.lightningRepository.ticketWithdrawalOpenNode(claimRequest);
+        return null;
+        /*
+                if(round.isPresent()){
+            Ticket ticket = this.ticketRepository.findByCustomerDescriptionAndRound(claimRequest.getSecret(), round.get());
+            switch (ticket.getStatus()){
+                case CLAIM: 
+                    throw new ClaimException("Claim already in progress");
+                case CLAIM_PAID: 
+                    throw new ClaimException("Claim already paid");
+                case WINNER: 
+                    this.lightningService.ticketWithdrawalOpenNode(claimRequest);
+                case CLAIM_FAILED: 
+                    this.lightningService.ticketWithdrawalOpenNode(claimRequest);
+                    break;
+                case PAID:
+                    throw new ClaimException("Not a winner!"); 
+                case FAILED:
+                    throw new ClaimException("Not a winner! - ticket is unpaid"); 
+                case UNPAID:
+                    throw new ClaimException("Not a winner! - ticket is unpaid"); 
+				default:
+					break;
+            }
+        }
+        */
+
+        // TODO
+        // TODO iniate openenode withdrawal and parse its response and return status to user
+		//return null;
+	}
+
+	public ClaimResponse updateWinner(WithdrawalResponse withdrawalResponse) {
+        // TODO
+        // update winner on sucessfull withdrawal
+		return null;
+	}
+
 }

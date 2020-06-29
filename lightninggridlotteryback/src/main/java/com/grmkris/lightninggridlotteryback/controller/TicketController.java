@@ -3,13 +3,9 @@ package com.grmkris.lightninggridlotteryback.controller;
 import com.grmkris.lightninggridlotteryback.exception.RoundEndedException;
 import com.grmkris.lightninggridlotteryback.exception.RoundNotFoundException;
 import com.grmkris.lightninggridlotteryback.exception.RoundRunningException;
-import com.grmkris.lightninggridlotteryback.model.ClaimRequest;
-import com.grmkris.lightninggridlotteryback.model.ClaimResponse;
 import com.grmkris.lightninggridlotteryback.model.TicketRequest;
 import com.grmkris.lightninggridlotteryback.model.TicketResponse;
 import com.grmkris.lightninggridlotteryback.model.OpenNode.ChargeHook;
-import com.grmkris.lightninggridlotteryback.model.database.Round.Round;
-import com.grmkris.lightninggridlotteryback.model.database.Round.RoundStatus;
 import com.grmkris.lightninggridlotteryback.service.RoundService;
 import com.grmkris.lightninggridlotteryback.service.TicketService;
 
@@ -30,24 +26,30 @@ public class TicketController {
     @Autowired
     RoundService roundService;
 
+    /**
+     * New ticket request, response is presented to user as QR code
+     * @param ticketRequest
+     * @return
+     */
     @RequestMapping(path = "/ticket", method = RequestMethod.POST)
     public TicketResponse newTicket(@RequestBody TicketRequest ticketRequest) {
         return ticketService.newTicket(ticketRequest);
     }
 
-    @RequestMapping(path = "/winnings", method = RequestMethod.GET)
-    public ClaimResponse checkWinningTicket(@RequestBody ClaimRequest claimRequest) {
-        return ticketService.claimWinnings(claimRequest);
-    }
-
+    /**
+     * Callback endpoint  for sucessfull payment from Opennode
+     * @param chargeHook
+     * @return
+     * @throws RoundNotFoundException
+     * @throws RoundEndedException
+     * @throws RoundRunningException
+     */
     @RequestMapping(path = "/success", method = RequestMethod.POST)
     public int success(ChargeHook chargeHook)
             throws RoundNotFoundException, RoundEndedException, RoundRunningException {
         ticketService.updateTicket(chargeHook.getId(), chargeHook.getStatus());
-        Round round = roundService.checkAndEndRound();
-        if ( round.getRoundStatus().equals(RoundStatus.COMPLETED)){
-            ticketService.findWinners(round);
-        }
+        roundService.updateRound();
+
         return 200;
     }
 

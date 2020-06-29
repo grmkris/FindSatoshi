@@ -3,13 +3,12 @@ package com.grmkris.lightninggridlotteryback.service;
 import java.io.IOException;
 import java.util.List;
 
-import com.grmkris.lightninggridlotteryback.model.ClaimRequest;
-import com.grmkris.lightninggridlotteryback.model.ClaimResponse;
 import com.grmkris.lightninggridlotteryback.model.TicketRequest;
 import com.grmkris.lightninggridlotteryback.model.TicketResponse;
 import com.grmkris.lightninggridlotteryback.model.database.Round.Round;
 import com.grmkris.lightninggridlotteryback.model.database.Ticket.Ticket;
 import com.grmkris.lightninggridlotteryback.model.database.Ticket.TicketStatus;
+import com.grmkris.lightninggridlotteryback.repository.LightningRepository;
 import com.grmkris.lightninggridlotteryback.repository.RoundRepository;
 import com.grmkris.lightninggridlotteryback.repository.TicketRepository;
 
@@ -28,42 +27,28 @@ public class TicketService {
     private RoundRepository roundRepository;
 
     @Autowired
-    private LightningService lightningService;
+    private LightningRepository lightningRepository;
 
+    /**
+     * Requests new ticket from openNode API service
+     * @param ticketRequest
+     * @return
+     */
     public TicketResponse newTicket(TicketRequest ticketRequest) {
         try {
-
-            if(ticketRequest.getCustomerEmail().equals("")){
-                ticketRequest.setCustomerEmail("kristjan.grm1@gmail.com");
-            }
-            if(ticketRequest.getCustomerName().equals("")){
-                ticketRequest.setCustomerName("Anonymous");
-            }
-            if(ticketRequest.getDescription().equals("Anonymous")){
-                ticketRequest.setDescription("Anonymous");
-            }
-
-            
             // contact openNode with new lightningID
-            TicketResponse ticketResponse = lightningService.newTicketOpenNode(ticketRequest, TICKET_AMOUNT);
+            TicketResponse ticketResponse = lightningRepository.newTicketOpenNode(ticketRequest, TICKET_AMOUNT);
 
             // Insert ticket information to the database
             Round round = roundRepository.findRunningRound();
-            Ticket ticket = Ticket.builder()
-                .amount(ticketResponse.getAmount())
-                .customerDescription(ticketResponse.getCustomerDescription())
-                .customerEmail(ticketResponse.getCustomerEmail())
-                .customerName(ticketResponse.getCustomerName())
-                .lnPaymentRequest(ticketResponse.getLightningInvoice())
-                .predict(ticketResponse.getNumbers())
-                .openNodeID(ticketResponse.getOpenNodeID())
-                .round(round)
-                .settledAt(ticketResponse.getSettledAt())
-                .status(TicketStatus.valueOf(ticketResponse.getStatus()))
-                .ticketID(ticketResponse.getTicketID())
-                .build();
-                ticket = ticketRepository.save(ticket);
-                
+            Ticket ticket = Ticket.builder().amount(ticketResponse.getAmount())
+                    .secret(ticketRequest.getSecret())
+                    .lnPaymentRequest(ticketResponse.getLightningInvoice()).predict(ticketResponse.getNumbers())
+                    .openNodeID(ticketResponse.getOpenNodeID()).round(round).settledAt(ticketResponse.getSettledAt())
+                    .status(TicketStatus.valueOf(ticketResponse.getStatus())).ticketID(ticketResponse.getTicketID())
+                    .build();
+            ticket = ticketRepository.save(ticket);
+
             ticketResponse.setTicketID(ticket.getTicketID());
             return ticketResponse;
 
@@ -71,41 +56,35 @@ public class TicketService {
             // TODO Auto-generated catch block
             // API excpetion poglej proper exception handling
             e.printStackTrace();
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    
     public Ticket getTicket(Long ticketID) {
         Ticket ticket = ticketRepository.getOne(ticketID);
         return ticket;
     }
 
-
-    public ClaimResponse claimWinnings(ClaimRequest claimRequest){
-        return null;
-    }
-
-    public Ticket updateTicket(String openNodeID, String status){
+    public Ticket updateTicket(String openNodeID, String status) {
         Ticket ticket = ticketRepository.findByOpenNodeID(openNodeID);
-        if (status.equals("paid")){
+        if (status.equals("paid")) {
             ticket.setStatus(TicketStatus.PAID);
         }
         ticketRepository.save(ticket);
         return ticket;
-        
     }
 
-	public void findWinners(Round round) {
+    public void findWinners(Round round) {
         List<Ticket> ticketList = ticketRepository.findByRound(round);
         ticketList.stream().forEach(ticket -> {
-            if ( ticket.getPredict().equals(round.getWinner())){
+            if (ticket.getPredict().equals(round.getWinner())) {
                 ticket.setStatus(TicketStatus.WINNER);
             }
         });
         ticketRepository.saveAll(ticketList);
-	}
-
+    }
 
 }

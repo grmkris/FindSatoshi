@@ -9,9 +9,7 @@ public class TicketResponse {
 
     Long ticketID; //naš interni id, order_id za openNode
     String openNodeID; //openNode id
-    String customerName; // name of customer, or custom text
-    String customerEmail; //
-    String customerDescription; // description
+    String secret; // description
     String numbers;
     String status; // unpaid, paid, processing, win, lose
     Double amount; //cena ticketa (200 satoshi)

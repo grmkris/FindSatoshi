@@ -9,11 +9,7 @@ import lombok.Data;
 @Builder
 public class TicketRequest{
 
-    String customerName; // name of customer, or custom text
-    String customerEmail; //
-    String description;
+    String secret; 
     String predict;
-    String callbackUrl;
-    String successUrl;
-
+    
 }

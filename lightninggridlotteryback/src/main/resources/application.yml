@@ -45,4 +45,6 @@ logging:
   level:
     root: DEBUG
 find-satoshi:
-  url: http://19beb3e8.ngrok.io/
+  url: http://bb7146414466.ngrok.io/
+  success-url: localhost:4200
+  open-node: b95d29ac-4ce9-45c9-ab9e-8767b35a01de

@@ -32,9 +32,7 @@ public class Ticket {
     @JoinColumn(name="roundID", nullable=false)
     private Round round;
     
-    private String customerName;
-    private String customerEmail;
-    private String customerDescription;
+    private String secret;
     private String predict;
 
     private String openNodeID;

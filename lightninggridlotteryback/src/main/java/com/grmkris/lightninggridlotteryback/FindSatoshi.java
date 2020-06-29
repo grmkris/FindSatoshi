@@ -17,8 +17,8 @@ public class FindSatoshi {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FindSatoshi.class, args);
-
 	}
+
 	@Bean
 	public CommandLineRunner init(RoundService roundService) {
 		return (args) -> {

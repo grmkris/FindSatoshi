@@ -11,14 +11,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long>{
-    // TODO
+
     List<Ticket> findByRound(Round round);
 
     List<Ticket> findByRoundAndStatus(Round round, TicketStatus status);
 
     Ticket findByOpenNodeID(String openNodeID);
 
-    Ticket findByCustomerName(String customerName);
+    Ticket findBySecretAndRound(String secret, Round round);
 
 
     /*
