@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Claim winnings 🔥</h1>
 
-<div mat-dialog-content>Enter lightning invoice for 25000 satoshis below !
+<div mat-dialog-content>Enter lightning invoice for 5000 satoshis below !
 
     <form class="example-form">
         <mat-form-field class="example-full-width" appearance="outline">
@@ -9,7 +9,8 @@
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize" 
             cdkAutosizeMinRows="2" 
-            cdkAutosizeMaxRows="7"  
+            cdkAutosizeMaxRows="7"
+            [(ngModel)]="paymentReq" 
             placeholder="lntb1u1pwz5w78pp5e8w8cr5c30xzws92v36sk45znhjn098rtc4pea6ertnmvu25ng3sdpywd6hyetyvf5hgueqv3jk6meqd9h8vmmfvdjsxqrrssy29mzkzjfq2767evzu893heqex737dhcapvcuantkztg6pnk77nrm72y7z0rs47wzc09vcnugk2ve6sr2ewvcrtqnh3yttv847qqvqpvv398"></textarea>
         </mat-form-field>
     </form>
@@ -18,5 +19,5 @@
 
 <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Close</button>
-    <button mat-button color="accent">Claim</button>
+    <button mat-button color="accent" (click)="claim()">Claim</button>
 </div>

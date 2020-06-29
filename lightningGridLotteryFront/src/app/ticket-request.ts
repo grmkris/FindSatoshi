@@ -1,7 +1,5 @@
 export interface TicketRequest {
-    customerName : String; // name of customer, or custom text
-    customerEmail : String; //
-    description : String;
+    secret : String;
     predict : String ;
     callbackUrl : String;
     successUrl : String;

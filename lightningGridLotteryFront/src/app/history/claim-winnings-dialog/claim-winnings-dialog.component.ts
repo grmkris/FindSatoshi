@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RoundInfo } from 'src/app/round-info';
 
-
 @Component({
   selector: 'app-claim-winnings-dialog',
   templateUrl: './claim-winnings-dialog.component.html',
@@ -10,9 +9,16 @@ import { RoundInfo } from 'src/app/round-info';
 })
 export class ClaimWinningsDialogComponent implements OnInit {
 
+  paymentReq : string;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: RoundInfo) {}
 
   ngOnInit() {
+  }
+
+  claim(){
+   //var decoded = decode(this.paymentReq);
+    //console.log(decoded);
   }
 
 }
